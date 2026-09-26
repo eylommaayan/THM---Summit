@@ -83,3 +83,44 @@ THM{2ff48a3421a938b388418be273f4806d}
 ```
 
 <img width="761" height="371" alt="image" src="https://github.com/user-attachments/assets/93c4f785-09db-42ee-9ba0-04cd5f2d95de" />
+
+
+
+## שלב 3: חסימת שמות דומיין (רמת Domain Names בפירמידה)
+
+### תרגום הודעת התוקף (RE: Stumped again... for now!)
+> "שלומות שוב,  
+> נראה שהצלחת לחסום את הדומיין שלי הפעם מכיוון שכל כתובת IP חדשה שאני מנסה לצוץ ממנה מתגלה מיד. אתה מתחיל לגרום לי לצרות, מכיוון שכעת אני נאלץ לרכוש ולרשום שמות דומיין חדשים ולשנות רשומות DNS. תוקפים מסוימים עשויים להתעצבן מזה ולחפש מטרה אחרת וקלה יותר, אבל אני בעל מוטיבציה להמשיך, כמו רבים אחרים[cite: 19].  
+>   
+> הפעם — חסימת Hashes, כתובות IP או שמות דומיין כבר לא תעזור לך[cite: 19]. אם ברצונך לזהות את `sample4.exe`, שים לב לארטיפקטים (Artifacts) או לשינויים שהנוזקה שלי משאירה על מערכת הקורבן[cite: 19].  
+>   
+> בהצלחה[cite: 19]."
+<img width="767" height="342" alt="image" src="https://github.com/user-attachments/assets/a37a3186-2e35-4a20-9c18-24030c1bfa98" />
+
+---
+
+### מה בוצע בשלב זה בפועל?
+1. **ניתוח בקשות DNS ב-Sandbox:**  
+   הקובץ `sample3.exe` נותח בסביבת ההרצה המבודדת[cite: 14]. תחת לשונית **Network Activity** ובקטגוריית **DNS requests**, זוהתה שאילתת רשת פעילה לדומיין זדוני ששימש להורדת רכיב Backdoor[cite: 15]:  
+   `emudyn.bresonicz.info`[cite: 15]
+2. **הגדרת חוק סינון ב-DNS:**
+
+   <img width="761" height="313" alt="image" src="https://github.com/user-attachments/assets/23805460-bee4-4cbe-80c7-f54869ef3b31" />
+ 
+   במסך `DNS Rule Manager` הוגדר חוק חסימה ייעודי[cite: 16, 18]:
+   * **Rule Name:** `Block Malicious Domain`[cite: 16, 18]
+   * **Category:** `Malware`[cite: 16, 18]
+   * **Domain Name:** `emudyn.bresonicz.info`[cite: 16, 18]
+   * **Action:** `Deny`[cite: 16, 18]  
+   
+   החלת החוק מנעה משרתי הארגון לפתור את כתובת ה-IP של הדומיין, ובכך נחסמה ההורדה והתקשורת לשרת השליטה[cite: 18].
+
+---
+<img width="772" height="360" alt="image" src="https://github.com/user-attachments/assets/c2b0eed4-c6fa-4898-aafb-43cfef7d47e0" />
+
+<img width="768" height="318" alt="image" src="https://github.com/user-attachments/assets/da689abb-eb90-4a18-b0a1-cb7aeac088d6" />
+
+
+### הדגל שהתקבל (Flag 3)
+```text
+THM{4eca9e2f61a19ecd5df34c788e7dce16}
