@@ -124,3 +124,49 @@ THM{2ff48a3421a938b388418be273f4806d}
 ### הדגל שהתקבל (Flag 3)
 ```text
 THM{4eca9e2f61a19ecd5df34c788e7dce16}
+
+```
+
+## שלב 4: זיהוי עקבות מארח (רמת Host Artifacts בפירמידה)
+
+### תרגום הודעת התוקף (New Approach)
+> "היי.  
+> אני לא בטוח מה הצלחת לעשות הפעם, אבל בהחלט תקעת לי מקל בגלגלים של מדגם הנוזקה שלי! בזבזתי המון זמן בניסיון להגדיר מחדש את כלי התקיפה והמתודולוגיות שלי כדי לעקוף את מנגנון הזיהוי שלך – סופר מעצבן!  
+> לגרום לצוות שלי לפתח טכניקות חדשות שיוטמעו בכלי היריב דרש השקעת זמן עצומה ועלויות כספיות משמעותיות. טוב שיש לנו תקציב נכבד לפעילות הזו, אבל שחקני איום רבים כבר היו מוותרים ומחפשים קורבן חדש עד עכשיו.  
+> סוף סוף יש לי את sample5.exe כדי שתנסה לזהות. הפעם מדובר בגישה שונה. במדגם הזה, כל ה'עבודה הכבדה' וההוראות מתרחשות בשרת ה-Backend שלי, כך שאני יכול לשנות בקלות את סוגי הפרוטוקולים שאני משתמש בהם ואת הארטיפקטים שאני משאיר על המארח. תצטרך למצוא משהו ייחודי או חריג לגבי ההתנהגות של הכלי שלי כדי לזהות אותו.  
+> צירפתי את יומני חיבורי הרשת היוצאים מ-12 השעות האחרונות על מכונת הקורבן. אולי זה יעזור לך להצליב נתונים.  
+> אני כבר לא יודע מה לעשות אם תצליח לעצור אותי גם ברמה הזו.  
+> מ-Sphinx המתוסכל."
+
+---
+
+### מה בוצע בשלב זה בפועל?
+1. **ניתוח עקבות מארח (Host Artifacts) ב-Sandbox:**  
+   הקובץ `sample4.exe` נותח בסביבת ההרצה המבודדת, ונמצא כי הוא מנסה להשבית את מנגנון ההגנה של מערכת ההפעלה באמצעות עריכת ה-Registry:  
+
+<img width="775" height="214" alt="image" src="https://github.com/user-attachments/assets/afa904ed-cd30-4181-901c-a2e3d4903c07" />
+<img width="747" height="396" alt="image" src="https://github.com/user-attachments/assets/b4924282-9a0d-42a4-8f20-8659bb046f4d" />
+
+   * **פעולה שבוצעה:** שינוי ערך מפתח ברישום המערכת לביטול הניטור בזמן אמת של Windows Defender.
+3. **הגדרת חוק סיגמא (Sigma Rule Builder):**  
+   במסך ה-`Sigma Rule Builder` נבחר מקור היומנים מסוג `Sysmon Event Logs` תחת קטגוריית `Registry Modifications`[cite: 5], והוגדרו הפרטים הבאים[cite: 7]:  
+   * **Registry Key:** `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Defender\Real-Time Protection`[cite: 7]  
+   * **Registry Name:** `DisableRealtimeMonitoring`[cite: 7]  
+   * **Value:** `1`[cite: 7]  
+   * **ATT&CK ID:** `Defense Evasion (TA0005)`
+   * <img width="748" height="607" alt="image" src="https://github.com/user-attachments/assets/8d7d5763-05b4-41dc-897d-ec33e49e4857" />
+   <img width="758" height="306" alt="image" src="https://github.com/user-attachments/assets/f33b8ac7-33f0-4b45-a3d3-513e0ae87188" />
+
+
+
+   החלת החוק אפשרה למערכת ה-SIEM לזהות בזמן אמת ולחסום את הניסיון לפגוע ברכיבי האבטחה של המארח[cite: 6].
+
+---
+
+### הדגל שהתקבל (Flag 4)
+<img width="772" height="355" alt="image" src="https://github.com/user-attachments/assets/a6c363ac-07fc-492b-96af-98368135c568" />
+
+```text
+THM{c956f455fc076aea829799c0876ee399}
+```
+
