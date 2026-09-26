@@ -1,4 +1,4 @@
-<img width="761" height="371" alt="image" src="https://github.com/user-attachments/assets/93c4f785-09db-42ee-9ba0-04cd5f2d95de" /># THM---Summit
+# THM---Summit
 תרגיל מעשי בתחום הנדסת זיהויים (Detection Engineering) וסימולציית תקיפה מול תוקף מתקדם (Sphinx), הממחיש את העלייה בשלבי **פירמידת הכאב (Pyramid of Pain)**[cite: 2, 6].
 <img width="1497" height="416" alt="image" src="https://github.com/user-attachments/assets/f5f09676-3dfb-4a6e-a4cc-a79bb7e3b27e" />
 
@@ -81,5 +81,5 @@ THM{f3cbf08151a11a6a331db9c6cf5f4fe4}
 ```text
 THM{2ff48a3421a938b388418be273f4806d}
 ```
-### הדגל שהתקבל![Uploading image.png…]()
 
+<img width="761" height="371" alt="image" src="https://github.com/user-attachments/assets/93c4f785-09db-42ee-9ba0-04cd5f2d95de" />
