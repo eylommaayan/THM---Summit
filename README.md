@@ -1,4 +1,4 @@
-# THM---Summit
+<img width="761" height="371" alt="image" src="https://github.com/user-attachments/assets/93c4f785-09db-42ee-9ba0-04cd5f2d95de" /># THM---Summit
 תרגיל מעשי בתחום הנדסת זיהויים (Detection Engineering) וסימולציית תקיפה מול תוקף מתקדם (Sphinx), הממחיש את העלייה בשלבי **פירמידת הכאב (Pyramid of Pain)**[cite: 2, 6].
 <img width="1497" height="416" alt="image" src="https://github.com/user-attachments/assets/f5f09676-3dfb-4a6e-a4cc-a79bb7e3b27e" />
 
@@ -38,4 +38,48 @@
 ```text
 THM{f3cbf08151a11a6a331db9c6cf5f4fe4}
 <img width="766" height="347" alt="image" src="https://github.com/user-attachments/assets/97fda13f-d74d-41de-83f1-cb954ad831fc" />
+
+
+```
+
+## שלב 2: חסימת כתובות IP (רמת IP Addresses בפירמידה)
+
+### תרגום הודעת התוקף (Stumped again... for now!)
+> "אהה.  
+> נראה שעצרת אותי שוב. בטח מצאת את כתובת ה-IP שאליה דוגמית הנוזקה שלי התחברה. חכם!  
+>   
+> אולם השיטה הזו אינה חסינה לחלוטין — עבור יריב בעל מוטיבציה, זה עניין טריוויאלי לעקוף אותה באמצעות כתובת IP ציבורית חדשה[cite: 13]. בדיוק נרשמתי לספק שירותי ענן וכעת יש לי גישה להרבה יותר כתובות IP ציבוריות![cite: 13]  
+
+<img width="761" height="371" alt="image" src="https://github.com/user-attachments/assets/0c4a651b-0bd1-481b-b580-0399ffc0e4cc" />
+
+> הפעם תצטרך לזהות את `sample3.exe` בדרך אחרת[cite: 13]. כבר הרמתי את השרת שלי מכתובת IP חדשה ויש לי עוד שרתי גיבוי רבים למקרה שהם ייחסמו![cite: 13]  
+> בהצלחה. 😈"[cite: 13]
+
+---
+<img width="767" height="362" alt="image" src="https://github.com/user-attachments/assets/c5c3b0c8-5aab-4d7f-abd6-2ed8de9a82db" />
+
+### מה בוצע בשלב זה בפועל?
+1. **ניתוח תעבורת רשת ב-Sandbox:**  
+   הקובץ `sample2.exe` נותח בסביבת ההרצה המבודדת[cite: 9]. תחת הלשונית **Network Activity**, זוהתה בקשת HTTP יוצאת (Egress) לתשתית אירוח חיצונית (Intrabuzz Hosting Limited)[cite: 10].
+2. **חילוץ ה-IOC (אינדיקטור הפריצה):**  
+   חולצה כתובת ה-IP של שרת ה-C2[cite: 10]:  
+   `154.35.10.113` (בפורט 4444)[cite: 10].
+3. **הגדרת חוק חומת אש (Firewall Rule):**  
+   במסך `Firewall Rule Manager` הוגדר חוק חסימה לתעבורה יוצאת<img width="760" height="297" alt="image" src="https://github.com/user-attachments/assets/68b89c22-196d-4a71-b828-f655b7135bcc" />
+[cite: 12]:
+   * **Type:** `Egress`[cite: 12]
+   * **Source IP:** `Any`[cite: 12]
+   * **Destination IP:** `154.35.10.113`[cite: 12]
+   * **Action:** `Deny`[cite: 12]
+   
+   החלת החוק ניתקה את ערוץ השליטה והבקרה של הנוזקה ומנעה את השלמת המתקפה.
+
+---
+
+### הדגל שהתקבל<img width="762" height="356" alt="image" src="https://github.com/user-attachments/assets/e7da3715-4642-4d7a-95b7-3f49a29e4e9e" />
+ (Flag 2)
+```text
+THM{2ff48a3421a938b388418be273f4806d}
+```
+### הדגל שהתקבל![Uploading image.png…]()
 
